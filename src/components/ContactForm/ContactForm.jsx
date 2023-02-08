@@ -4,15 +4,31 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const Input = styled(Field)`
   display: block;
 `;
+
+const schema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  number: Yup.number()
+    .required('Required'),
+});
+
 class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
+
+  // propTypes = {
+  //   name: PropTypes.string.isRequired,
+  //   number: PropTypes.number.isRequired,
+  // };
 
   submitContact = (values, { resetForm }) => {
     const People = {
@@ -29,7 +45,7 @@ class ContactForm extends Component {
       <div className={css.main}>
         <Formik
           initialValues={this.state}
-          validationSchema={this.schema}
+          validationSchema={schema}
           onSubmit={this.submitContact}
         >
           <Form>
@@ -57,7 +73,9 @@ class ContactForm extends Component {
                 <ErrorMessage name="number" />
               </label>
             </div>
-            <button className={css.form_button} type="submit">Add contact</button>
+            <button className={css.form_button} type="submit">
+              Add contact
+            </button>
           </Form>
         </Formik>
       </div>
@@ -67,4 +85,7 @@ class ContactForm extends Component {
 
 export default ContactForm;
 
-ContactForm.propTypes = {};
+ContactForm.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
+};
