@@ -8,7 +8,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 const Input = styled(Field)`
   display: block;
 `;
-
 class ContactForm extends Component {
   state = {
     name: '',
@@ -26,7 +25,6 @@ class ContactForm extends Component {
   };
 
   render() {
-    // const { name, number } = this.state;
     return (
       <div className={css.main}>
         <Formik
@@ -59,7 +57,7 @@ class ContactForm extends Component {
                 <ErrorMessage name="number" />
               </label>
             </div>
-            <button type="submit">Add contact</button>
+            <button className={css.form_button} type="submit">Add contact</button>
           </Form>
         </Formik>
       </div>

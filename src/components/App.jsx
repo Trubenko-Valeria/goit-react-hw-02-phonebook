@@ -1,11 +1,18 @@
 import { Component } from 'react';
 import css from './App.module.css';
+
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+
 class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     filter: '',
   };
 
@@ -14,31 +21,17 @@ class App extends Component {
   };
 
   formSubmit = data => {
-    data.name !== this.state.contacts.name
-      ? this.setState({ contacts: [...this.state.contacts, data] })
-      : alert(data.name, ' is already in contacts');
+    console.log('DDDDDDDDDDD', data.name)
+    const dat = this.state.contacts.includes(data.name);
+    console.log('DDDDDDDDDDD', dat);
+    this.setState({ contacts: [...this.state.contacts, data] });
   };
 
-  // function deleteItem(id) { 
-    
-  // }
-  // deleteItem = id => {
-  //   console.log('ID',id.id)
-  //   this.setState(({ contacts }) => {
-  //     const index = contacts.indexOf(id);
-  //     console.log("index", index);
-  //     const before = contacts.slice(0, index);
-  //     console.log('before', before);
-  //     const after = contacts.slice(index + 1);
-  //     console.log('after', after);
-
-  //     console.log(before, after);
-  //     const newArray = [...before, ...after];
-  //     return {
-  //       contacts: newArray,
-  //     };
-  //   });
-  // };
+  deleteContact = idCont => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(cont => cont.id !==idCont)
+    }))
+  }
 
   render() {
     const { contacts, filter } = this.state;
@@ -54,7 +47,7 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.filterContact} />
-        <ContactList contacts={visibleFilter} />
+        <ContactList contacts={visibleFilter} onDeleteCont={this.deleteContact} />
       </div>
     );
   }
