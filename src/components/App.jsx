@@ -19,7 +19,6 @@ class App extends Component {
     function checkAvailability(arr, val) {
       return arr.some(arrVal => val === arrVal.name);
     }
-    
     const rez = checkAvailability(this.state.contacts, nameCont.name);
 
     rez ? alert( nameCont.name + ' is already in contacts.') : this.setState({
