@@ -22,8 +22,8 @@ class App extends Component {
     
     const rez = checkAvailability(this.state.contacts, nameCont.name);
 
-    {rez ? alert( nameCont.name + ' is already in contacts.') : this.setState({
-      contacts: [...this.state.contacts, nameCont]})}
+    rez ? alert( nameCont.name + ' is already in contacts.') : this.setState({
+      contacts: [...this.state.contacts, nameCont]})
 
     // if (rez) {
     //   alert({ nameCont }, 'is a contact');
