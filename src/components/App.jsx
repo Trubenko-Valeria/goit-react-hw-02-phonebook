@@ -21,8 +21,11 @@ class App extends Component {
     }
     const rez = checkAvailability(this.state.contacts, nameCont.name);
 
-    rez ? alert( nameCont.name + ' is already in contacts.') : this.setState({
-      contacts: [...this.state.contacts, nameCont]})
+    rez
+      ? alert(nameCont.name + ' is already in contacts.')
+      : this.setState({
+          contacts: [...this.state.contacts, nameCont],
+        });
 
     // if (rez) {
     //   alert({ nameCont }, 'is a contact');
@@ -30,14 +33,13 @@ class App extends Component {
     //   this.setState({
     //     contacts: [...this.state.contacts, nameCont],
     // })
-    };
-  
-    
+  };
+
   deleteContact = idCont => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(cont => cont.id !== idCont)
-    }))
-  }
+      contacts: prevState.contacts.filter(cont => cont.id !== idCont),
+    }));
+  };
 
   getVisibleFilter = () => {
     const { contacts, filter } = this.state;
@@ -45,7 +47,7 @@ class App extends Component {
     return contacts.filter(filt =>
       filt.name.toLowerCase().includes(normalizeFilter)
     );
-  }
+  };
 
   render() {
     const { filter } = this.state;
@@ -58,7 +60,10 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.filterContact} />
-        <ContactList contacts={visibleFilter} onDeleteCont={this.deleteContact} />
+        <ContactList
+          contacts={visibleFilter}
+          onDeleteCont={this.deleteContact}
+        />
       </div>
     );
   }
