@@ -16,30 +16,30 @@ const schema = Yup.object().shape({
 });
 
 class ContactForm extends Component {
+  static defaultProps = {
+    name: 'Анонім',
+    number: 'Невідомий',
+  };
+
   state = {
     name: '',
     number: '',
   };
 
-  PropTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-  };
-
-  submitContact = values => {
+  submitContact = (values, { resetForm }) => {
+    console.log('VVV',values)
     const People = {
       id: nanoid(),
       name: values.name,
       number: values.number,
     };
     this.props.onSubmit(People);
-    this.reset();
-    // resetForm();
+    resetForm();
   };
 
-  reset = () => {
-    this.setState({ name: '' });
-  };
+  // reset = () => {
+  //   this.setState({ name: '' });
+  // };
 
   render() {
     return (
@@ -62,5 +62,10 @@ class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+};
 
 export default ContactForm;
