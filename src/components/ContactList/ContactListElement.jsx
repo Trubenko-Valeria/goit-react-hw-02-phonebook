@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function ContactListElement({ contact, onDeleteCont }) {
     return (
-      <li key={contact.id}>
+      <li>
         {contact.name}: {contact.number}
         <button
           className={css.list_button}

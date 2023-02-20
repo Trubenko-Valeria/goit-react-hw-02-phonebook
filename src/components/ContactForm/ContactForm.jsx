@@ -26,20 +26,31 @@ class ContactForm extends Component {
     number: '',
   };
 
-  submitContact = (values, { resetForm }) => {
-    console.log('VVV',values)
+  // reset = () => {
+  //   this.setState({ name: '' });
+  // };
+
+  submitContact = (values, action) => {
+    console.log('DDD', values);
+    console.log('AAA', action);
     const People = {
       id: nanoid(),
       name: values.name,
       number: values.number,
     };
     this.props.onSubmit(People);
-    resetForm();
-  };
+    
+    action.resetForm({
+      values: {
+        name: '',
+        number: '',
+      },
+    });
 
-  // reset = () => {
-  //   this.setState({ name: '' });
-  // };
+    const result = action.formSubmit;
+    console.log('RRR', result);
+    // resetForm();
+  };
 
   render() {
     return (
@@ -64,8 +75,7 @@ class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

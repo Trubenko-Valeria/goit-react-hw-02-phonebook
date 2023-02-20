@@ -25,8 +25,10 @@ class App extends Component {
       ? alert(nameCont.name + ' is already in contacts.')
       : this.setState({
           contacts: [...this.state.contacts, nameCont],
-        });
-
+      });
+    
+    return rez
+    
     // if (rez) {
     //   alert({ nameCont }, 'is a contact');
     // } else {
@@ -52,6 +54,8 @@ class App extends Component {
   render() {
     const { filter } = this.state;
     const visibleFilter = this.getVisibleFilter();
+    // const rezult =;
+    // console.log('REZ', rezult);
 
     return (
       <div className={css.main_wrapper}>
