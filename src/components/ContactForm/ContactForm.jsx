@@ -31,24 +31,27 @@ class ContactForm extends Component {
   // };
 
   submitContact = (values, action) => {
-    console.log('DDD', values);
-    console.log('AAA', action);
     const People = {
       id: nanoid(),
       name: values.name,
       number: values.number,
     };
-    this.props.onSubmit(People);
     
-    action.resetForm({
+    const result = this.props.onSubmit(People);
+
+     result
+      ? action.resetForm({
+      values: {
+        name: '',
+        number: values.number,
+      },
+    })
+      : action.resetForm({
       values: {
         name: '',
         number: '',
       },
     });
-
-    const result = action.formSubmit;
-    console.log('RRR', result);
     // resetForm();
   };
 
